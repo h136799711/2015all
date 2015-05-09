@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>{:C('BRAND_NAME')}</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<!-- Set render engine for 360 browser -->
+		<meta name="renderer" content="webkit">
+		
+		<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+		
+		
+		 <script type="text/javascript">
+		 	
+		 	var url = "{:U('Weixin/Weixinjs/index',array('tk'=>$token))}?url="+encodeURIComponent(location.href.split('#')[0]);
+			document.write('<script src="'+url+'"><\/script>');
+		 </script>
+		 		
+		<script type="text/javascript" src="__JS__/index.js?v=__APP_VERSION__"></script>
+		
+		
+		<style type="text/css">
+			html {
+			  font-family: sans-serif;
+			  -ms-text-size-adjust: 100%;
+			  -webkit-text-size-adjust: 100%;
+			}
+			body {
+			  margin: 0;
+			}
+			article,
+			aside,
+			details,
+			figcaption,
+			figure,
+			footer,
+			header,
+			hgroup,
+			main,
+			menu,
+			nav,
+			section,
+			summary {
+			  display: block;
+			}
+			body{
+				font-family: "微软雅黑";
+				margin: 0px;
+				padding: 0px;
+			}
+			.footer{
+				height:40px;
+				background: #ee2e68;
+				position: fixed;
+				bottom: 0px;
+				left: 0px;
+				width:100%;
+				padding:5px 10px;
+				color:#ffffff;
+				font-size: 12px;
+			}
+			.avatar{
+				width:40px;
+				height:40px;
+			}
+			.btn{
+				display: inline-block;
+				border:1px #b4eb3b solid;
+				padding:5px 10px;
+				text-decoration: none;
+				color: #ffffff;
+			}
+			.btn:visited{
+				color: #ffffff;
+			}
+			.buy{
+				margin-top:5px;
+				margin-right: 20px;
+			}
+			.fl{
+				float:left;
+			}
+			.fr{
+				float:right;
+			}
+			.nickname{
+				float:left;
+				display:inline-block;
+				line-height: 20px;
+				padding: 0px 5px;
+			}
+			.loading{
+				width:30px;
+				height:30px;
+			}
+			.img-responsive{
+				max-width: 100%;
+				width:100%;
+				width:640px;
+			}
+			.body{
+				padding-bottom: 60px;
+				width: 100%;
+				max-width: 100%;
+			}
+		</style>
+		<!--<script type="text/javascript" src="__CDN__/imagesloaded/3.1.8/imagesloaded.pkgd.min.js"></script>-->
+		<script type="text/javascript" src="__CDN__/jquery/2.1.1/jquery.min.js"></script>
+		<script type="text/javascript" src="__CDN__/jquery-lazyload/1.9.5/jquery.lazyload.min.js"></script>
+		
+	</head>
+
+	<body>
+		<!--
+			subscribe : 
+			openid : 
+			nickname : 
+			city : 
+			province : 
+			country : 
+			headimgurl : 
+			subscribe_time : 
+			unionid : 
+			remark : 
+			 -->
+		<empty name="userinfo">
+			<div>
+				无法获取您的信息，请使用微信打开！
+			</div>
+			<else/>
+			<div style="width:100%">
+				
+				<div class="body">
+					<for start="1" end="8">
+					<a  href="{:U('Shop/Index/buy',array('pid'=>1))}" >
+						<img class="img-responsive lazy"  src="__CDN__/common/loading-1.gif" data-original="__IMG__/demo/1-{$i}.jpg" alt="图片" />
+					</a>
+					</for>
+				</div>
+				<div class="footer">
+					<div class="fl">
+						<img class="fl avatar" src="{$userinfo.avatar}" />
+
+						<span class="nickname"><span style="color:#b3ed3a;">{$userinfo.nickname}</span>
+						<br/><eq name="groupaccess.alloweddistribution" value="1">您已经是族长<else/>请立即购买成为族长</eq>
+						<!--<img src="__IMG__/loading.gif" style="width:30px;height:30px;" alt="..." />-->
+						</span>
+
+					</div>
+					<div class="fr buy">
+						<a href="{:U('Shop/Index/buy',array('pid'=>1))}" class="btn btn-border ">立即购买</a>
+					</div>
+				</div>
+			</div>
+		</empty>
+		<!-- 微信分享内容-->
+		<input type="hidden" id="wxshareTitle" value="加入我们" />
+		<input type="hidden" id="wxshareLink" value="{$shareUrl}" />
+		<input type="hidden" id="wxshareImgUrl" value="{$shareImg}" />
+		<input type="hidden" id="wxshareDesc" value="赢在一秒！" />
+		<include file="partial/tongji" />
+		{__NORUNTIME__}
+		<script type="text/javascript">
+			$(function(){
+				$("img.lazy").lazyload();
+			})	
+		</script>
+	</body>
+	</html>
