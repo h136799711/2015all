@@ -138,7 +138,7 @@ class PromotioncodeApi {
 	private function hasAuthorized($fans){
 		if(empty($fans) || !isset($fans['groupid'])){return false;}
 		$groupid = $fans['groupid'];
-		if($groupid == 0){
+		if($groupid != C('ROLE_ZUZHANG')){
 			return false;
 		}
 		$result = apiCall("Admin/GroupAccess/getInfo", array('wxuser_group_id'=>$groupid));
